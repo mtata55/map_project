@@ -4,13 +4,15 @@ var myViewModel = {
 	locations: ko.observableArray(location_list)
 };
 
+/*
 $(document).ready(function()
 	{
 		$("#searchbar").change(filter);
 
+
 	})
 
-
+*/
 
 function filter(){
 
@@ -38,6 +40,20 @@ function filter(){
 	}
 
 
+function zoomOnClick (data, event){
+	var clicked_location = []
+	for (i=0; i<location_list.length; i++)
+	{
+		var location = location_list[i];
+		if (location.name == event.target.text)
+		{
+			var new_location = new Location(location.name, location.lat, location.lng)
+			clicked_location.push(new_location);
+			create_markers(clicked_location);
+
+		}
+	}
+}
 
 
 // Activates knockout.js
