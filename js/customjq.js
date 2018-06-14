@@ -4,7 +4,7 @@ $(document).ready(function()
 	{
 		collapse();
 		$(window).resize(collapse);
-		$("#searchbar").keypress(filter);
+		//$("#searchbar").keypress(filter);
 	})
 
 

@@ -38,18 +38,9 @@ function initMap() {
         });
 
 
-/*
 
-        var infowindow = new google.maps.InfoWindow({
-            content: "first marker " + bigBen.lat + " "+bigBen.lng
 
-        });
 
-        marker.addListener("mouseover", function(){
-            infowindow.open(map, marker);
-        });
-
-*/
         //var geocoder = new google.maps.Geocoder();
 
 
@@ -67,8 +58,14 @@ function initMap() {
         //used to extract geocoding data for selected locations
         //geocodeAddress(geocoder,location_list[i].name);
 
+        var infowindow = new google.maps.InfoWindow();
+
 
         marker_list.push(marker);
+
+        marker.addListener('click', function(){
+            populateInfoWindow(this, infowindow);
+        })
 
 
     }
@@ -92,10 +89,30 @@ function create_markers(location_list) {
             map: map,
             title: location_list[i].name
             });
+
         //used to extract geocoding data for selected locations
         //geocodeAddress(geocoder,location_list[i].name);
 
+        var infowindow = new google.maps.InfoWindow();
+
 
         marker_list.push(marker);
+
+        marker.addListener('click', function(){
+            populateInfoWindow(this, infowindow);
+        })
+
+    }
+}
+
+function populateInfoWindow(marker, infowindow){
+    if (infowindow.marker != marker) {
+        infowindow.marker = marker;
+        infowindow.setContent(marker.title);
+        infowindow.open(map, marker);
+        //Clear marker property on close
+        infowindow.addListener('closeclick', function(){
+            infoWindow.setMarker(null);
+        });
     }
 }

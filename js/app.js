@@ -7,7 +7,7 @@ var myViewModel = {
 $(document).ready(function()
 	{
 		$("#searchbar").change(filter);
-		//$("#searchbar").change(new_filter);
+
 	})
 
 
@@ -34,9 +34,8 @@ function filter(){
 		//myViewModel.locations([]);
 		myViewModel.locations(filtered_locations);
 		create_markers(filtered_locations);
-		console.log(myViewModel.locations());
+		//console.log(myViewModel.locations());
 	}
-
 
 
 
