@@ -20,7 +20,8 @@
 <!-- Title and Search Bar -->
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Maps Project</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Filter Locations" aria-label="Search">
+      <input class="form-control form-control-dark w-100" type="text" aria-label="Search" id="searchbar" placeholder="Filter List Here" data-bind="value: searchContent">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" data-bind="text: searchContent"></a>
       </nav>
 
 <!-- Side Navigation Bar -->
@@ -36,7 +37,6 @@
               <div id=collapseExample class="collapse show" data-bind="foreach: locations">
               <li class="nav-item">
                 <a class="nav-link active" href="#" data-bind="text: name">
-                Location 1<span class="sr-only">(current)</span>
                 </a>
               </li>
             </div>

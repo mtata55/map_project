@@ -23,12 +23,13 @@ function geocodeAddress(geocoder, address) {
           }
         });
 }
-
 */
 
 
 
+
 //initialise base map with markers
+
 function initMap() {
         //constructor creates a new map - only center and zoom are required
         var map = new google.maps.Map(document.getElementById("map"),{
@@ -49,7 +50,7 @@ function initMap() {
         });
 
 */
-        var geocoder = new google.maps.Geocoder();
+        //var geocoder = new google.maps.Geocoder();
 
 
         var marker_list = [];
@@ -73,3 +74,28 @@ function initMap() {
     }
 }
 
+//create markers for filtered locations
+function create_markers(location_list) {
+        var map = new google.maps.Map(document.getElementById("map"),{
+        center: {lat: location_list[0].lat, lng: location_list[0].lng},
+        zoom:13
+        });
+
+        var marker_list = [];
+
+        for (i=0; i<location_list.length; i++)
+        {
+
+        var lat_long = {lat: location_list[i].lat, lng: location_list[i].lng};
+        var marker = new google.maps.Marker({
+            position: lat_long,
+            map: map,
+            title: location_list[i].name
+            });
+        //used to extract geocoding data for selected locations
+        //geocodeAddress(geocoder,location_list[i].name);
+
+
+        marker_list.push(marker);
+    }
+}
