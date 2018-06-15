@@ -1,10 +1,13 @@
-//Run collapse function on pageload and resize. Checks for screensize
-//and adjust visibility of locations list
+
 $(document).ready(function()
 	{
-		collapse();
+		//Initialise markers on page load
+		create_markers(location_list);
+
+		//Run collapse function on pageload and resize. Checks for screensize
+		//and adjust visibility of locations list
 		$(window).resize(collapse);
-		//$("#searchbar").keypress(filter);
+
 	})
 
 
