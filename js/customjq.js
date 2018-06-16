@@ -11,6 +11,7 @@ $(document).ready(function()
 	})
 
 
+
 function collapse(){
 	if (window.matchMedia('(max-width: 768px)').matches)
 	{
@@ -82,3 +83,14 @@ let url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
 	return outputurl;
 
 }
+
+
+function getPhotoJSON(title){
+let url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
+`&redirects&prop=pageimages&piprop=thumbnail&pithumbsize=200&format=json&formatversion=2&origin=*`
+
+$.getJSON(url, function(data){
+	console.log(data.query.pages[0].thumbnail.source);
+})
+}
+

@@ -21,6 +21,7 @@ function initMap() {
         let marker = new google.maps.Marker({
             position: lat_long,
             map: map,
+            animation: null,
             title: location_list[i].name
             });
 
@@ -28,10 +29,11 @@ function initMap() {
         //Add listeners to for infowindow function on click
         marker.addListener('click', (function(markercopy){
             return function(){
+            toggleBounce(marker_list, markercopy);
             let infowindow = new google.maps.InfoWindow({maxWidth:300});
-            let picture = getPhoto(marker.title);
-            let text = getInfo(marker.title);
-            let wikiurl = getUrl(marker.title);
+            let picture = getPhoto(markercopy.title);
+            let text = getInfo(markercopy.title);
+            let wikiurl = getUrl(markercopy.title);
             let contentString = `<h3>${markercopy.title}</h3>`+
             `<img src="${picture}" alt="${markercopy.title}">`+
             `<p>${text} ...`+`<a href=${wikiurl}>Read more on wikipedia</a></p>`;
@@ -52,17 +54,6 @@ return marker_list;
 }
 
 
-function createInfowindows(marker) {
-        infowindows=[];
-
-        //Add listener to marker with IIFE closure
-
-
-
-        console.log(infowindows);
-        return infowindows;
-    }
-
 
 function openInfoWindows(infowindows, map){
     for (i=0; i<infowindows.length;i++){
@@ -75,6 +66,33 @@ function closeInfoWindows(infowindows){
         infowindows[i].close();
     }
 }
+
+function toggleBounce(marker_list, markercopy) {
+
+        for (i=0; i<marker_list.length;i++){
+        if (marker_list[i].title == markercopy.title)
+            {
+        marker_list[i].setAnimation(google.maps.Animation.BOUNCE);
+        }
+        else
+        {
+        marker_list[i].setAnimation(null);
+
+        }
+        }
+}
+
+
+function createInfowindows(marker) {
+        infowindows=[];
+
+        //Add listener to marker with IIFE closure
+
+
+
+        console.log(infowindows);
+        return infowindows;
+    }
 
 
 

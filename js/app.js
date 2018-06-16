@@ -83,25 +83,29 @@ function markerFilter(){
 */
 
 
-function zoomOnClick (data, event){
+function clickMarker (data, event){
 	/*
 	the event parameter allows access
 	to knockout data on events (e.g. clicks)
 	event.target.text used to get the text clicked
 	*/
 	let clicked_location = []
-	i = 0;
-	let location = location_list[i];
-	while (location.name != event.target.text)
+	let i = 0;
+	let markers_list = initMap();
+	let location = markers_list[i].title;
+	while (location != event.target.text)
 	{
 		i++;
-		location = location_list[i];
+		location = markers_list[i].title;
 	}
 
+	google.maps.event.trigger(markers_list[i], 'click');
+
+
 	//console.log('March found Iteration '+ i);
-	let new_location = new Location(location.name, location.lat, location.lng)
-	clicked_location.push(new_location);
-	createMarkers(clicked_location);
+	//let new_location = new Location(location.name, location.lat, location.lng)
+	//clicked_location.push(new_location);
+	//createMarkers(clicked_location);
 	//var markers = createMarkers(clicked_location);
 	//createInfowindows(markers);
 	//var infowindows = createInfowindows(markers);
