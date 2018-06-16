@@ -24,10 +24,8 @@ function filter(){
 		var location = location_list[i];
 		var search = myViewModel.searchContent().toString();
 
-	/*
-	If search string is in list, create new filtered list
-	and create markers for filtered locations
-	*/
+
+	//If search string is in list, create new filtered list
 	if (location.name.toLowerCase().includes(search.toLowerCase()))
 	{
 
@@ -36,6 +34,7 @@ function filter(){
 	}
 	}
 
+	//create markers for filtered locations
 		myViewModel.locations(filtered_locations);
 		create_markers(filtered_locations);
 	}

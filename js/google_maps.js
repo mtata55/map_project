@@ -1,9 +1,9 @@
 
 
 //initialise base map with markers
-
+//constructor creates a new map - only center and zoom are required
 function initMap() {
-        //constructor creates a new map - only center and zoom are required
+
         var map = new google.maps.Map(document.getElementById("map"),{
             center: {lat: 51.508914, lng: -0.111138},
             zoom:13
@@ -30,6 +30,7 @@ function create_markers(location_list) {
         for (i=0; i<location_list.length; i++)
         {
 
+
         var lat_long = {lat: location_list[i].lat, lng: location_list[i].lng};
         var marker = new google.maps.Marker({
             position: lat_long,
@@ -40,16 +41,25 @@ function create_markers(location_list) {
 
         marker_list.push(marker);
 
-        //Add listener with closure with IIFE
+
+
+        //Add listener to marker with IIFE closure
         marker.addListener('click', (function(markercopy){
             return function(){
-            var infowindow = new google.maps.InfoWindow();
+            var infowindow = new google.maps.InfoWindow({maxWidth:300});
+            //console.log(markercopy.title);
+            var picture = getPhoto(markercopy.title);
+            var text = getInfo(markercopy.title);
+            var wikiurl = getUrl(markercopy.title);
+            //console.log(`The picture is `+ getPhoto(markercopy.title));
+            var contentString = `<h3>${markercopy.title}</h3>`+
+            `<img src="${picture}" alt="${markercopy.title}">`+
+            `<p>${text} ...`+`<a href=${wikiurl}>Read more on wikipedia</a></p>`;
             closeInfoWindows(infowindows);
             infowindow.marker = markercopy;
-            infowindow.setContent(markercopy.title);
+            infowindow.setContent(contentString);
             infowindow.open(map,markercopy);
             infowindows.push(infowindow);
-
 
         };
         }) (marker));
