@@ -1,29 +1,100 @@
 
 
-//initialise base map with markers
-//constructor creates a new map - only center and zoom are required
 function initMap() {
-
-        var map = new google.maps.Map(document.getElementById("map"),{
+        //initialise base map with markers
+        //constructor creates a new map - only center and zoom are required
+        let map = new google.maps.Map(document.getElementById("map"),{
             center: {lat: 51.508914, lng: -0.111138},
             zoom:13
         });
 
+        let marker_list = [];
+        let infowindows = [];
+
+        //Loop over locations in input list
+
+        for (i=0; i<location_list.length; i++)
+        {
+
+        //Create markers and add to marker list
+        let lat_long = {lat: location_list[i].lat, lng: location_list[i].lng};
+        let marker = new google.maps.Marker({
+            position: lat_long,
+            map: map,
+            title: location_list[i].name
+            });
+
+        marker_list.push(marker);
+        //Add listeners to for infowindow function on click
+        marker.addListener('click', (function(markercopy){
+            return function(){
+            let infowindow = new google.maps.InfoWindow({maxWidth:300});
+            let picture = getPhoto(marker.title);
+            let text = getInfo(marker.title);
+            let wikiurl = getUrl(marker.title);
+            let contentString = `<h3>${markercopy.title}</h3>`+
+            `<img src="${picture}" alt="${markercopy.title}">`+
+            `<p>${text} ...`+`<a href=${wikiurl}>Read more on wikipedia</a></p>`;
+            closeInfoWindows(infowindows);
+            infowindow.marker = markercopy;
+            infowindow.setContent(contentString);
+            infowindow.open(map,markercopy);
+            infowindows.push(infowindow);;
+
+            };
+        }) (marker));
+
+
+
 }
 
+return marker_list;
+}
+
+
+function createInfowindows(marker) {
+        infowindows=[];
+
+        //Add listener to marker with IIFE closure
+
+
+
+        console.log(infowindows);
+        return infowindows;
+    }
+
+
+function openInfoWindows(infowindows, map){
+    for (i=0; i<infowindows.length;i++){
+        infowindows[i].open();
+    }
+}
+
+function closeInfoWindows(infowindows){
+    for (i=0; i<infowindows.length;i++){
+        infowindows[i].close();
+    }
+}
+
+
+
 //create markers for filtered locations
-function create_markers(location_list) {
+
+function createMarkers(location_list) {
 
         //Define Map variable
-        var map = new google.maps.Map(document.getElementById("map"),{
+        /*
+        let map = new google.maps.Map(document.getElementById("map"),{
         center: {lat: location_list[0].lat, lng: location_list[0].lng},
         zoom:13
         });
+        */
 
+        let staticmap = initMap();
         //Define variables to hold marker list and infowindows
         //list for iteration
-        var marker_list = [];
-        var infowindows = [];
+
+        let marker_list = [];
 
         //Loop over locations in input list
 
@@ -31,48 +102,18 @@ function create_markers(location_list) {
         {
 
 
-        var lat_long = {lat: location_list[i].lat, lng: location_list[i].lng};
-        var marker = new google.maps.Marker({
+        let lat_long = {lat: location_list[i].lat, lng: location_list[i].lng};
+        let marker = new google.maps.Marker({
             position: lat_long,
-            map: map,
+            map: staticmap,
             title: location_list[i].name
             });
 
 
         marker_list.push(marker);
 
-
-
-        //Add listener to marker with IIFE closure
-        marker.addListener('click', (function(markercopy){
-            return function(){
-            var infowindow = new google.maps.InfoWindow({maxWidth:300});
-            //console.log(markercopy.title);
-            var picture = getPhoto(markercopy.title);
-            var text = getInfo(markercopy.title);
-            var wikiurl = getUrl(markercopy.title);
-            //console.log(`The picture is `+ getPhoto(markercopy.title));
-            var contentString = `<h3>${markercopy.title}</h3>`+
-            `<img src="${picture}" alt="${markercopy.title}">`+
-            `<p>${text} ...`+`<a href=${wikiurl}>Read more on wikipedia</a></p>`;
-            closeInfoWindows(infowindows);
-            infowindow.marker = markercopy;
-            infowindow.setContent(contentString);
-            infowindow.open(map,markercopy);
-            infowindows.push(infowindow);
-
-        };
-        }) (marker));
-
     }
-
-}
-
-
-function closeInfoWindows(infowindows){
-    for (i=0; i<infowindows.length;i++){
-        infowindows[i].close();
-    }
+return  marker_list;
 }
 
 

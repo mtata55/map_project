@@ -2,7 +2,7 @@
 $(document).ready(function()
 	{
 		//Initialise markers on page load
-		create_markers(location_list);
+		//filter();
 
 		//Run collapse function on pageload and resize. Checks for screensize
 		//and adjust visibility of locations list
@@ -26,8 +26,8 @@ function collapse(){
 getting function return as undefined otherwise
 */
 function getPhoto(title){
-var url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
-`&prop=pageimages&piprop=thumbnail&pithumbsize=200&format=json&formatversion=2&origin=*`
+let url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
+`&redirects&prop=pageimages&piprop=thumbnail&pithumbsize=200&format=json&formatversion=2&origin=*`
 
 	$.ajax({
 		dataType: "json",
@@ -46,8 +46,8 @@ getting function return as undefined otherwise
 */
 
 function getInfo(title){
-var url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
-`&prop=extracts&exintro=&explaintext=&format=json&formatversion=2&origin=*`
+let url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
+`&redirects&prop=extracts&exintro=&explaintext=&format=json&formatversion=2&origin=*`
 
 	$.ajax({
 		dataType: "json",
@@ -66,8 +66,8 @@ Using .ajax to allow for non async request as
 getting function return as undefined otherwise
 */
 function getUrl(title){
-var url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
-`&format=json&formatversion=2&origin=*`
+let url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
+`&redirects&format=json&formatversion=2&origin=*`
 
 	$.ajax({
 		dataType: "json",

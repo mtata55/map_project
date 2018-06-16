@@ -1,73 +1,119 @@
 
-var myViewModel = {
+let myViewModel = {
 	searchContent: ko.observable(''),
-	locations: ko.observableArray(location_list)
+	locations: ko.observableArray(location_list),
+	markers: ko.observableArray([])
 };
 
-/*
-$(document).ready(function()
-	{
-		$("#searchbar").change(filter);
 
-
-	})
-
-*/
 
 function filter(){
 
-	var filtered_locations = [];
+	let filtered_locations = [];
+	let search = myViewModel.searchContent().toString();
 	//Loop over full location list
 
 	for (i=0; i<location_list.length; i++)
 	{
-		var location = location_list[i];
-		var search = myViewModel.searchContent().toString();
+		let location = location_list[i];
+
 
 
 	//If search string is in list, create new filtered list
 	if (location.name.toLowerCase().includes(search.toLowerCase()))
 	{
 
-		var new_location = new Location(location.name, location.lat, location.lng)
+		let new_location = new Location(location.name, location.lat, location.lng)
 		filtered_locations.push(new_location);
+
 	}
 	}
 
 	//create markers for filtered locations
+		//let markers_list = createMarkers(filtered_locations);
 		myViewModel.locations(filtered_locations);
-		create_markers(filtered_locations);
+
+		//myViewModel.markers(markers_list);
+		//createMarkers(filtered_locations);
+
+		//console.log(myViewModel.markers());
+		//console.log(markers_list);
+
+		let markers_list = initMap();
+
+		for (i=0; i<markers_list.length;i++)
+		{
+
+
+		if (markers_list[i].title.toLowerCase().indexOf(search.toLowerCase()) == -1)
+		{
+			markers_list[i].setVisible(false);
+
+		}
+
 	}
+}
+
+/*
+function markerFilter(){
+	let search = myViewModel.searchContent().toString();
+	let markers_list = initMap();
+	console.log(markers_list);
+
+
+	for (i=0; i<markers_list.length;i++)
+		{
+			console.log(search.toLowerCase());
+			console.log(markers_list[i].title.toLowerCase());
+			console.log(markers_list[i].title.toLowerCase().indexOf(search.toLowerCase()));
+
+		if (markers_list[i].title.toLowerCase().indexOf(search.toLowerCase()) == -1)
+			{
+				markers_list[i].setVisible(false);
+				console.log('hidden');
+
+			}
+		else {
+				markers_list[i].setVisible(true);
+			}
+		}
+
+}
+
+*/
 
 
 function zoomOnClick (data, event){
 	/*
-	the event variable allows access
+	the event parameter allows access
 	to knockout data on events (e.g. clicks)
 	event.target.text used to get the text clicked
 	*/
-	var clicked_location = []
-	for (i=0; i<location_list.length; i++)
+	let clicked_location = []
+	i = 0;
+	let location = location_list[i];
+	while (location.name != event.target.text)
 	{
-		var location = location_list[i];
-		if (location.name == event.target.text)
-		{
-			var new_location = new Location(location.name, location.lat, location.lng)
-			clicked_location.push(new_location);
-			create_markers(clicked_location);
-			setTimeout(function(){ $( "area[title='Big Ben']" ).click()}, 100);
-			//$( "area[title='Big Ben']" ).click();
-			//$( "area[title='Big Ben']" ).trigger("click");
-
-
-			//console.log(`$( "area[title='${location.name}']" )`);
-
-
-
-		}
+		i++;
+		location = location_list[i];
 	}
-}
 
+	//console.log('March found Iteration '+ i);
+	let new_location = new Location(location.name, location.lat, location.lng)
+	clicked_location.push(new_location);
+	createMarkers(clicked_location);
+	//var markers = createMarkers(clicked_location);
+	//createInfowindows(markers);
+	//var infowindows = createInfowindows(markers);
+	//openInfoWindows(infowindows);
+
+	//$( "area[title='Big Ben']" ).click();
+	//$( "area[title='Big Ben']" ).trigger("click");
+
+
+	//console.log(`$( "area[title='${location.name}']" )`);
+
+}
 
 
 
@@ -106,3 +152,12 @@ function new_filter(){
 }
 */
 //}
+/*
+$(document).ready(function()
+	{
+		$("#searchbar").change(filter);
+
+
+	})
+
+*/
