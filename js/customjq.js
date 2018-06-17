@@ -1,13 +1,12 @@
+//Run collapse function on pageload and resize.
 $(document).ready(function() {
-    //Initialise markers on page load
-    //filter();
-
-    //Run collapse function on pageload and resize. Checks for screensize
-    //and adjust visibility of locations list
     $(window).resize(collapse);
-
 })
 
+/**
+* @description Check screensize and collapse / show
+* specified ID
+*/
 function collapse() {
     if (window.matchMedia('(max-width: 768px)').matches) {
         $('#collapseExample').removeClass('show');
@@ -16,8 +15,13 @@ function collapse() {
     }
 }
 
-/*get photo function. Using .ajax to allow for non async request as
-getting function return as undefined otherwise
+/**
+* @description Get thumbnail url from wikipedia page
+* @param {title} title of wikipedia page
+*/
+/*Using .ajax to allow for non async request as
+otherwise getting function return as undefined followed by
+* actual result
 */
 function getPhoto(title) {
     let url = `https://en.wikipedia.org/w/api.php?action=query&titles=` + title +
@@ -33,9 +37,14 @@ function getPhoto(title) {
     });
     return result;
 }
-/*get info function to return first 400 characters of wiki extract.
-Using .ajax to allow for non async request as
-getting function return as undefined otherwise
+
+/**
+* @description Get first 400 characters of text from wikipedia page
+* @param {title} title of wikipedia page
+*/
+/*Using .ajax to allow for non async request as
+otherwise getting function return as undefined followed by
+* actual result
 */
 
 function getInfo(title) {
@@ -54,9 +63,13 @@ function getInfo(title) {
 
 }
 
-/*get Url function to return page id and generate wikipedia URL.
-Using .ajax to allow for non async request as
-getting function return as undefined otherwise
+/**
+* @description Get url of article on wikipedia
+* @param {title} title of wikipedia page
+*/
+/*Using .ajax to allow for non async request as
+otherwise getting function return as undefined followed by
+* actual result
 */
 function getUrl(title) {
     let url = `https://en.wikipedia.org/w/api.php?action=query&titles=` + title +
@@ -75,15 +88,3 @@ function getUrl(title) {
     return outputurl;
 
 }
-
-/*
-function getPhotoJSON(title){
-let url = `https://en.wikipedia.org/w/api.php?action=query&titles=`+title+
-`&redirects&prop=pageimages&piprop=thumbnail&pithumbsize=200&format=json&formatversion=2&origin=*`
-
-$.getJSON(url, function(data){
-	console.log(data.query.pages[0].thumbnail.source);
-})
-}
-
-*/

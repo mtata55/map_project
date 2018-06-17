@@ -1,5 +1,4 @@
-//Objects and data used by both knockout and google maps api
-
+//Objects and data used by both KO and Google Maps API
 
 // Editable data for locations
 let location_list = [
@@ -22,10 +21,17 @@ let location_list = [
     new Location("London Bridge", 51.507842, -0.08769770000003518)
 ];
 
-//function to create new location object
+
+/**
+* @description Create new location object
+* @param {name} name of location
+* @param {lat} latitude
+* @param {lng} longitude
+*/
 function Location(name, lat, lng) {
     let self = this;
     self.name = name;
     self.lat = lat;
     self.lng = lng;
 }
+
