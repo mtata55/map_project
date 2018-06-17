@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
@@ -13,71 +13,52 @@
     <!-- Custom JS-->
     <script type="text/javascript" src="js/shared.js"></script>
     <script type="text/javascript" src="js/google_maps.js"></script>
-
 </head>
+
 <body>
-
-<!-- Title and Search Bar -->
+    <!-- Title and Search Bar -->
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Maps Project</a>
-      <input class="form-control form-control-dark w-100" type="text" aria-label="Search" id="searchbar" placeholder="Filter List Here"
-      data-bind="textInput: searchContent, event:{keyup: filter}"> <!-- keyup: filter, textInput allows for immediate updates - value only updates when moving out of the focus area-->
-      </nav>
-
-<!-- Side Navigation Bar -->
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Maps Project</a>
+        <input class="form-control form-control-dark w-100" type="text" aria-label="Search" id="searchbar" placeholder="Filter List Here" data-bind="textInput: searchContent, event:{keyup: filter}">
+        <!-- keyup: filter, textInput allows for immediate updates - value only updates when moving out of the focus area-->
+    </nav>
+    <!-- Side Navigation Bar -->
     <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 bg-light sidebar active">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <button class="btn btn-primary" type="button" data-toggle="collapse"
-              data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Locations List
-              </button>
-              <div id=collapseExample class="collapse show" data-bind="foreach: locations, event:{click: clickMarker}">
-              <li class="nav-item">
-                <a class="nav-link active" href="#" data-bind="text: name">
+        <div class="row">
+            <nav class="col-md-2 bg-light sidebar active">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Locations List
+                        </button>
+                        <div id="collapseExample" class="collapse show" data-bind="foreach: locations, event:{click: clickMarker}">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" data-bind="text: name">
                 </a>
-              </li>
-            </div>
-            </ul>
-
-          </div>
-        </nav>
-
-
-
-
-    <!-- Map Area -->
-    <main id = map class="col-12 col-md-10 col-xl-10 py-md-3 pl-md-5 bd-content" role="main">
-
-    </main>
-
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Map Area -->
+            <main id="map" class="col-12 col-md-10 col-xl-10 py-md-3 pl-md-5 bd-content" role="main">
+            </main>
+        </div>
     </div>
-    </div>
-<footer>Credits to Wikipedia for location information and photos.</footer>
-
-
-<!-- Google Maps JS-->
-<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=drawing&v=3&key=AIzaSyCUpZQ-fjat8bIA7JTjvTeh1Dt8jXSHIHI&callback=initMap">
-</script>
-<!-- Knockout JS-->
-<script type="text/javascript" src="js/lib/knockout-3.4.2.js"></script>
-
-<!-- JS Files for functionality hosted on CDN. Links from https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-<!-- Custom JS-->
-<script type="text/javascript" src="js/customjq.js"></script>
-<script type="text/javascript" src="js/jqfiddle.js"></script>
-
-<!-- Knockout App JS-->
-<script async defer type="text/javascript" src="js/app.js"></script>
-<!-- Inititalise markers_list on page as a global variable-->
-<!--<script type="text/javascript">var markers_list =  initMap();</script>-->
+    <footer>Credits to Wikipedia for location information and photos.</footer>
+    <!-- Google Maps JS-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=drawing&v=3&key=AIzaSyCUpZQ-fjat8bIA7JTjvTeh1Dt8jXSHIHI&callback=initMap">
+    </script>
+    <!-- Knockout JS-->
+    <script type="text/javascript" src="js/lib/knockout-3.4.2.js"></script>
+    <!-- JS Files for functionality hosted on CDN. Links from https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <!-- Custom JS-->
+    <script type="text/javascript" src="js/customjq.js"></script>
+    <!-- Knockout App JS-->
+    <script async defer type="text/javascript" src="js/app.js"></script>
 </body>
+
 </html>

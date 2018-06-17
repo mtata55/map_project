@@ -1,28 +1,28 @@
-body, html {
-height: 100%;
-margin: 0;
-padding: 0;
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #map {
-height: 100%;
-min-height: 800px;
+    height: 100%;
+    min-height: 800px;
 }
 
 
-.sidebar{
+.sidebar {
     padding-top: 48px;
 }
 
 
-@media screen and (max-width:765px ){
-.container-fluid{
-	padding-top: 32px;
-}
+@media screen and (max-width:765px) {
+    .container-fluid {
+        padding-top: 32px;
+    }
 
-.sidebar{
-	padding-right: 0;
-	padding-left: 0;
-}
-
+    .sidebar {
+        padding-right: 0;
+        padding-left: 0;
+    }
 }
