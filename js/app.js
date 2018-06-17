@@ -2,7 +2,7 @@
 let myViewModel = {
 	searchContent: ko.observable(''),
 	locations: ko.observableArray(location_list),
-	markers: ko.observableArray([])
+	markers_list: ko.observableArray(initMap())
 };
 
 
@@ -39,16 +39,20 @@ function filter(){
 		//console.log(myViewModel.markers());
 		//console.log(markers_list);
 
-		let markers_list = initMap();
+		//let markers_list = initMap();
 
-		for (i=0; i<markers_list.length;i++)
+		for (i=0; i<myViewModel.markers_list().length;i++)
 		{
 
 
-		if (markers_list[i].title.toLowerCase().indexOf(search.toLowerCase()) == -1)
+		if (myViewModel.markers_list()[i].title.toLowerCase().indexOf(search.toLowerCase()) == -1)
 		{
-			markers_list[i].setVisible(false);
+			myViewModel.markers_list()[i].setVisible(false);
 
+		}
+		else
+		{
+			myViewModel.markers_list()[i].setVisible(true);
 		}
 
 	}
@@ -91,15 +95,14 @@ function clickMarker (data, event){
 	*/
 	let clicked_location = []
 	let i = 0;
-	let markers_list = initMap();
-	let location = markers_list[i].title;
+	let location = myViewModel.markers_list()[i].title;
 	while (location != event.target.text)
 	{
 		i++;
-		location = markers_list[i].title;
+		location = myViewModel.markers_list()[i].title;
 	}
 
-	google.maps.event.trigger(markers_list[i], 'click');
+	google.maps.event.trigger(myViewModel.markers_list()[i], 'click');
 
 
 	//console.log('March found Iteration '+ i);

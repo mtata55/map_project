@@ -73,27 +73,16 @@ function toggleBounce(marker_list, markercopy) {
         if (marker_list[i].title == markercopy.title)
             {
         marker_list[i].setAnimation(google.maps.Animation.BOUNCE);
+        marker_list[i].setAnimation(null);
         }
         else
         {
         marker_list[i].setAnimation(null);
 
+
         }
         }
 }
-
-
-function createInfowindows(marker) {
-        infowindows=[];
-
-        //Add listener to marker with IIFE closure
-
-
-
-        console.log(infowindows);
-        return infowindows;
-    }
-
 
 
 //create markers for filtered locations
