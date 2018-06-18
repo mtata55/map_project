@@ -33,9 +33,18 @@ function getPhoto(title) {
         url: url,
         success: function(data) {
             result = data.query.pages[0].thumbnail.source;
+        },
+        error: function (data){
+            alert(`Sorry, it seems like there was a problem getting the photo from Wikipedia.`+
+            `Please try again later. Thank you.`);
         }
     });
-    return result;
+        try {
+        return result;
+    }
+    catch(err) {
+        return ('')
+    }
 }
 
 /**
@@ -57,10 +66,18 @@ function getInfo(title) {
         url: url,
         success: function(data) {
             result = data.query.pages[0].extract.slice(0, 400);
+        },
+        error: function (data){
+            alert(`Sorry, it seems like there was a problem getting the information from Wikipedia.`+
+            `Please try again later. Thank you.`)
         }
     });
-    return result;
-
+    try {
+        return result;
+    }
+    catch(err) {
+        return ('')
+    }
 }
 
 /**
@@ -82,9 +99,16 @@ function getUrl(title) {
         success: function(data) {
             result = data.query.pages[0].pageid;
             outputurl = `https://en.wikipedia.org/?curid=${result}`
+        },
+        error: function (data){
+            alert(`Sorry, it seems like there was a problem getting the Wikipedia URL.`+
+            `Please try again later. Thank you.`);
         }
     });
-
-    return outputurl;
-
+    try {
+        return outputurl;
+    }
+    catch(err) {
+        return ('')
+    }
 }
